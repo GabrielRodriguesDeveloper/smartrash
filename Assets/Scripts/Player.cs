@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-
     Animator animator;
     float playerVelocity = 5.0f;
 
@@ -15,17 +14,24 @@ public class Player : MonoBehaviour
         animator = GetComponent <Animator>();
     }
 
-    void CameraMovement()
+    void GetItem()
     {
-        GameObject Camera = GameObject.FindGameObjectWithTag("MainCamera");
-        float mouseLocalX = Input.GetAxis("Mouse X") * 10.0f;
-        float mouseLocalY = Input.GetAxis("Mouse Y") * -0.5f;
-        transform.Rotate(0.0f, mouseLocalX, 0.0f);
-        Camera.transform.Rotate(mouseLocalY, 0.0f, 0.0f);
+        if (Input.GetKey(KeyCode.E))
+        {
+            animator.SetBool("isGetting", true);
+        }
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            animator.SetBool("isGetting", false);
+        }
     }
+
 
     void PlayerMove()
     {
+        float mouseLocalX = Input.GetAxis("Mouse X") * 10.0f;
+        transform.Rotate(0.0f, mouseLocalX, 0.0f);
+
         if (Input.GetKey(KeyCode.W))
         {
             animator.SetBool("isMoving", true);
@@ -43,6 +49,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         PlayerMove();
-        CameraMovement();
+        GetItem();
     }
 }
