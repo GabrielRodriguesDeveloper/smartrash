@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
 
     Animator animator;
+    float playerVelocity = 5.0f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,11 +24,8 @@ public class Player : MonoBehaviour
         Camera.transform.Rotate(mouseLocalY, 0.0f, 0.0f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void PlayerMove()
     {
-        float playerVelocity = 5.0f;
-
         if (Input.GetKey(KeyCode.W))
         {
             animator.SetBool("isMoving", true);
@@ -38,10 +37,12 @@ public class Player : MonoBehaviour
         {
             animator.SetBool("isMoving", false);
         }
+    }
 
-        
-        
-
+    // Update is called once per frame
+    void Update()
+    {
+        PlayerMove();
         CameraMovement();
     }
 }
